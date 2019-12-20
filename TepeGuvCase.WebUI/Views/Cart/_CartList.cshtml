@@ -1,0 +1,61 @@
+﻿<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                SubTotal
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (TepeGuvCase.WebUI.Tools.CartItem item in (Session["cart"] as TepeGuvCase.WebUI.Tools.MyCart).GetAllCartItem)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Price
+                </td>
+                <td>
+                    <input type="number" id="txtAmount" value="@item.Amount" min="0" onchange="CartUpdate(this.value,@item.ID)" />
+                </td>
+                <td>
+                    @item.SubTotal
+                </td>
+                <td>
+
+                    <a href="Javascript:void(0)" onclick="DeleteItemCart(@item.ID)">Sil</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4">
+                Toplam Sepet Tutarı
+            </td>
+            <td>
+                @((Session["cart"] as TepeGuvCase.WebUI.Tools.MyCart).GetAllCartItem.Sum(x => x.SubTotal).ToString("C2"))
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5">
+                @Html.ActionLink("Sepeti Onayla", "ConfirmCart", "Order")
+            </td>
+           
+        </tr>
+    </tfoot>
+</table>

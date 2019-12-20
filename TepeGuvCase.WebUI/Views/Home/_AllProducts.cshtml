@@ -1,0 +1,32 @@
+﻿@using TepeGuvCase.DAL
+@foreach (Product item in Model)
+{
+
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span title="@item.Title">@item.Title</span>
+            </div>
+            <div class="panel-body">
+                <div style="width:100%;height:75%;">
+                    <img src='https://via.placeholder.com/150X150' style="width:100%;height:100%;" alt="@item.Title" />
+                </div>
+
+                <div style="height:25%;">
+                    <div class="col-lg-3 ">
+                        @item.Price
+                    </div>
+                    <div class="col-lg-5">
+
+                    </div>
+                    <div class="col-lg-3">
+                        <input type="button" name="name" class="btn btn-warning" onclick="AddToMyCart(@item.ID)" value="Add Cart" />
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+}

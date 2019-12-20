@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<div class="row">
+    <div id="dvSepet" class="col-lg-8">
+        @Html.Action("_CartList", "Cart")
+    </div>
+</div>
+@section scripts
+{
+    <script>
+        function CartUpdate(deger,gid) {
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("UpdateCart","Cart")',
+                data: { amount: deger, id: gid },
+                success: function (data) {
+                    $("#dvSepet").html(data);
+                }
+
+
+            })
+        }
+
+        function DeleteItemCart(gid) {
+            var cvp = confirm("Ürünü Sepetten Çıkarmak İstediğinize Eminmisiniz?")
+            if (cvp) {
+                $.ajax({
+                    type: "Get",
+                    url: '@Url.Action("DeleteItemCart","Cart")',
+                    data: { id: gid },
+                    success: function (data) {
+                        $("#dvSepet").html(data);
+                    }
+
+                })
+            }
+        }
+
+        function AddToMyCart(aid) {
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("AddToCart","Cart")',
+                data: { id: aid },
+                success: function (data) {
+                    $("#menu li:nth-child(1)").html(data);
+                }
+
+            })
+        }
+
+
+    </script>
+}
+
+

@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+@using TepeGuvCase.DAL
+@model List<Product>
+<h2>Index</h2>
+<div class="row">
+    <div class="col-lg-12">
+
+        @Html.Action("_AllProducts", "Home")
+
+    </div>
+</div>
+
+@section scripts{
+
+    <script>
+        function AddToMyCart(aid) {
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("AddToCart","Cart")',
+                data: { id: aid },
+                success: function (data) {
+                    $("#menu li:nth-child(1)").html(data);
+                }
+
+            })
+        }
+
+
+
+    </script>
+
+
+}
